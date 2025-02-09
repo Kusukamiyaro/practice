@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { debounce, debounceTime, distinctUntilChanged, interval, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-autocomplete',
@@ -10,7 +10,7 @@ import { debounce, debounceTime, distinctUntilChanged, interval, Subject } from 
       class="form-control"
       type="text"
       [(ngModel)]="userName"
-      (input)="userNameSearch()"
+      (input)="onInputChange()"
       (focus)="onFocus()"
       (blur)="onBlur()"
     />
@@ -18,7 +18,7 @@ import { debounce, debounceTime, distinctUntilChanged, interval, Subject } from 
       <span
         *ngFor="let user of users"
         class="list-item"
-        (click)="setUserSelected(user.username)"
+        (click)="setUserSelected($event)"
       >
         👤 {{ user.username }}
       </span>
@@ -57,22 +57,22 @@ import { debounce, debounceTime, distinctUntilChanged, interval, Subject } from 
   ],
 })
 export class AutocompleteComponent implements OnInit {
-  value = 0;
   userName: string = '';
   showList = true;
   userSearch: any = new Subject();
   ngOnInit() {
-    this.value = 1;
-    this.userSearch.debounceTime(500).subscribe(() => {
-        this.userNameSearch();
-      });
+    this.userSearch.pipe(debounceTime(500)).subscribe(() => {
+      this.userNameSearch();
+    });
   }
   onFocus() {
     this.userSearch.next(this.userName);
     this.showList = true;
   }
   onBlur() {
-    setTimeout(()=>{this.showList = false},500)
+    setTimeout(() => {
+      this.showList = false;
+    }, 500);
   }
   onInputChange() {
     this.userSearch.next(this.userName);
@@ -80,8 +80,6 @@ export class AutocompleteComponent implements OnInit {
   users: any[] = [];
   constructor(private http: HttpClient) {}
   userNameSearch() {
-    console.log('event');
-
     //  this.users = this.users.filter((user: any) => {
     //   console.log("API Call", this.userName)
     //   return user.username.match(this.userName)
@@ -102,8 +100,9 @@ export class AutocompleteComponent implements OnInit {
         console.log(this.users);
       });
   }
-  setUserSelected(username: string) {
-    this.userName = username;
-    this.users = this.users.filter((user) => user.username === username);
+  setUserSelected(e: any) {
+    console.log(e);
+    this.userName = e.target.value;
+    this.users = this.users.filter((user) => user.username === e.target.value);
   }
 }
