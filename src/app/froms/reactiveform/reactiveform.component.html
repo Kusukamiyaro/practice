@@ -1,0 +1,9 @@
+<form action="" (ngSubmit)="submit(formRef)" #formRef="ngForm">
+    <ng-container *ngFor="let field of fields">
+
+        <label for="{{field.key}}">{{field.label}} </label>
+  <input id="{{field.key}}" type="{{field.type}}" formControlName="{{field.name}}">
+
+    </ng-container>
+    
+</form>

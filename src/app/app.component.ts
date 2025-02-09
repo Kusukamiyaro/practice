@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { PostsService } from './posts.service';
+import { PageEvent } from '@angular/material/paginator';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,51 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  posts:any[] = [
+    { title: 'Post 1', content: 'Content 1' },
+    { title: 'Post 2', content: 'Content 2' },
+    // Add more posts here
+  ];
+  paginatedPosts:any = [];
+  totalPosts = this.posts.length;
+  postsPerPage = 10;
+  currentPage = 0;
+  showUsers =true;
+  // ngOnInit() {
+  //   this.postService.getPosts().subscribe((data:any)=>{
+  //     this.posts = data;
+  //     this.totalPosts = data.length;
+  //     this.paginatePosts();
+  //   })
+  // }
+
+  // paginatePosts() {
+  //   const startIndex = this.currentPage * this.postsPerPage;
+  //   const endIndex = startIndex + this.postsPerPage;
+  //   this.paginatedPosts = this.posts.slice(startIndex, endIndex);
+  // }
+
+  // onPageChange(event: PageEvent) {
+  //   this.postsPerPage = event.pageSize;
+  //   this.currentPage = event.pageIndex;
+  //   this.paginatePosts();
+  // }
+
+
+  // getResponsiveCols(): number {
+  //   if (window.innerWidth >= 1200) {
+  //     return 3; // 3 columns for large screens
+  //   } else if (window.innerWidth >= 800) {
+  //     return 2; // 2 columns for medium screens
+  //   } else {
+  //     return 1; // 1 column for small screens
+  //   }
+  // }
+  // @HostListener('window:resize', ['$event'])
+  // onResize(event:any) {
+  //   this.getResponsiveCols();
+  // }
+
+
+
 }
