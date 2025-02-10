@@ -14,13 +14,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReactiveformComponent } from './froms/reactiveform/reactiveform.component';
 import { AutocompleteComponent } from './practice/autocomplete';
 import { PaginationComponent } from './practice/pagination';
+import { CarouselComponent } from './practice/carousel.component';
 @NgModule({
   declarations: [
     AppComponent,
     PostsComponent,
     ReactiveformComponent,
     AutocompleteComponent,
-    PaginationComponent
+    PaginationComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
