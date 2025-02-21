@@ -15,6 +15,7 @@ import { ReactiveformComponent } from './froms/reactiveform/reactiveform.compone
 import { AutocompleteComponent } from './practice/autocomplete';
 import { PaginationComponent } from './practice/pagination';
 import { CarouselComponent } from './practice/carousel.component';
+import { ProgressBarComponent } from './practice/progress-bar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import { CarouselComponent } from './practice/carousel.component';
     ReactiveformComponent,
     AutocompleteComponent,
     PaginationComponent,
-    CarouselComponent
+    CarouselComponent,
+    ProgressBarComponent
   ],
   imports: [
     BrowserModule,

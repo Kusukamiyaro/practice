@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { PostsService } from './posts.service';
 import { PageEvent } from '@angular/material/paginator';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,16 +11,16 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'app';
-  posts:any[] = [
+  posts: any[] = [
     { title: 'Post 1', content: 'Content 1' },
     { title: 'Post 2', content: 'Content 2' },
     // Add more posts here
   ];
-  paginatedPosts:any = [];
+  paginatedPosts: any = [];
   totalPosts = this.posts.length;
   postsPerPage = 10;
   currentPage = 0;
-  showUsers =true;
+  showUsers = true;
   // ngOnInit() {
   //   this.postService.getPosts().subscribe((data:any)=>{
   //     this.posts = data;
@@ -54,7 +55,25 @@ export class AppComponent {
   // onResize(event:any) {
   //   this.getResponsiveCols();
   // }
+  navitems: any = [];
+  constructor(private route: Router, private activeRoute: ActivatedRoute) {
+    console.log(this.route);
 
-
-
+  }
+  ngOnInit(): void {
+    this.getNavTabs()
+  }
+  redirect(item: any) {
+    this.route.navigate([item]);
+  }
+  getNavTabs() {
+    this.route.config.forEach((path) => {
+      console.log(path);
+      if (path.path && path.path.length > 0) {
+        this.navitems.push(path)
+      }
+    })
+  }
 }
+
+

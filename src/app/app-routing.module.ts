@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { AutocompleteComponent } from './practice/autocomplete';
 import { PaginationComponent } from './practice/pagination';
 import { CarouselComponent } from './practice/carousel.component';
+import { ProgressBarComponent } from './practice/progress-bar.component';
 
 const routes: Routes = [
 
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path:'carousel',
     component:CarouselComponent
+  },
+  {
+    path:'progress-bar',
+    component:ProgressBarComponent
   }
 ];
 
